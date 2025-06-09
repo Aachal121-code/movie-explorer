@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// Demo data for "Now Playing"
+// Demo data for "Now Playing" (Hollywood)
 const demoNowPlaying = [
   {
     id: 1,
@@ -56,7 +56,12 @@ const demoNowPlaying = [
     release_date: "1994-07-06",
     poster_path: "https://image.tmdb.org/t/p/w200/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"
   },
-  
+  {
+    id: 10,
+    title: "Inception",
+    release_date: "2009-12-25",
+    poster_path: "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg"
+  }
 ];
 
 // Demo data for search results
@@ -103,16 +108,64 @@ const demoSearch = [
     release_date: "2000-05-05",
     poster_path: "https://image.tmdb.org/t/p/w200/pRn3TJHbAqCAO7V1C0g5xw8AU8Y.jpg"
   }
-  
+];
+
+// Demo data for Bollywood movies
+const bollywoodMovies = [
+  {
+    id: 101,
+    title: "3 Idiots",
+    release_date: "2009-12-25",
+    poster_path: "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg"
+  },
+  {
+    id: 102,
+    title: "Dangal",
+    release_date: "2016-12-23",
+    poster_path: "https://m.media-amazon.com/images/I/81A-mvlo+QL._AC_SY679_.jpg"
+  },
+  {
+    id: 103,
+    title: "Zindagi Na Milegi Dobara",
+    release_date: "2011-07-15",
+    poster_path: "https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SY679_.jpg"
+  },
+  {
+    id: 104,
+    title: "Queen",
+    release_date: "2014-03-07",
+    poster_path: "https://m.media-amazon.com/images/I/81l3rZK4lnL._AC_SY679_.jpg"
+  },
+  {
+    id: 105,
+    title: "Barfi!",
+    release_date: "2012-09-14",
+    poster_path: "https://m.media-amazon.com/images/I/81eA5VnXNlL._AC_SY679_.jpg"
+  },
+  {
+    id: 106,
+    title: "Gully Boy",
+    release_date: "2019-02-14",
+    poster_path: "https://m.media-amazon.com/images/I/81pZ9h6r5lL._AC_SY679_.jpg"
+  },
+  {
+    id: 107,
+    title: "Taare Zameen Par",
+    release_date: "2007-12-21",
+    poster_path: "https://m.media-amazon.com/images/I/71Q0A6lK4lL._AC_SY679_.jpg"
+  },
+  {
+    id: 108,
+    title: "Dilwale Dulhania Le Jayenge",
+    release_date: "1995-10-20",
+    poster_path: "https://m.media-amazon.com/images/I/81Vw5Zl8J-L._AC_SY679_.jpg"
+  }
 ];
 
 function MovieExplorer() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // Use static demo data for "Now Playing"
-  const currentMovies = demoNowPlaying;
 
   // Simulate search with static data
   const searchMovies = (e) => {
@@ -128,7 +181,7 @@ function MovieExplorer() {
     }, 600); // Simulate network delay
   };
 
-    return (
+  return (
     <div style={{ width: "100%" }}>
       <form className="search-form" onSubmit={searchMovies}>
         <input
@@ -162,11 +215,29 @@ function MovieExplorer() {
         </div>
       )}
 
-      {/* Now Playing SECOND */}
+      {/* Hollywood Movies */}
       <div className="movies-container">
-        <h2>Now Playing</h2>
+        <h2>Hollywood Movies</h2>
         <div className="movies-list">
-          {currentMovies.map(movie => (
+          {demoNowPlaying.map(movie => (
+            <div key={movie.id} className="movie-card">
+              {movie.poster_path ? (
+                <img src={movie.poster_path} alt={movie.title} />
+              ) : (
+                <div className="movie-placeholder" />
+              )}
+              <h4>{movie.title}</h4>
+              <p>{movie.release_date}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bollywood Movies */}
+      <div className="movies-container">
+        <h2>Bollywood Movies</h2>
+        <div className="movies-list">
+          {bollywoodMovies.map(movie => (
             <div key={movie.id} className="movie-card">
               {movie.poster_path ? (
                 <img src={movie.poster_path} alt={movie.title} />
@@ -182,4 +253,5 @@ function MovieExplorer() {
     </div>
   );
 }
+
 export default MovieExplorer;
