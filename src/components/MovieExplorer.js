@@ -166,6 +166,7 @@ function MovieExplorer() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
+  
 
   // Simulate search with static data
   const searchMovies = (e) => {
@@ -179,6 +180,23 @@ function MovieExplorer() {
       setMovies(results);
       setLoading(false);
     }, 600); // Simulate network delay
+  };
+
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem('favorites')) || []
+  );
+
+  const addToFavorites = (movie) => {
+    if (!favorites.find(fav => fav.id === movie.id)) {
+      const updated = [...favorites, movie];
+      setFavorites(updated);
+      localStorage.setItem('favorites', JSON.stringify(updated));
+    }
+  };
+  const removeFromFavorites = (movie) => {
+    const updated = favorites.filter(fav => fav.id !== movie.id);
+    setFavorites(updated);
+    localStorage.setItem('favorites', JSON.stringify(updated));
   };
 
   return (
@@ -215,6 +233,31 @@ function MovieExplorer() {
         </div>
       )}
 
+      {favorites.length > 0 && (
+        <div className="movies-container">
+          <h2>Favorites</h2>
+          <div className="movies-list">
+            {favorites.map(movie => (
+              <div key={movie.id} className="movie-card">
+                {movie.poster_path ? (
+                  <img src={movie.poster_path} alt={movie.title} />
+                ) : (
+                  <div className="movie-placeholder" />
+                )}
+                <button
+                  onClick={() => removeFromFavorites(movie)}
+                  style={{ marginBottom: 8 }}
+                > 
+                  ❌ Remove
+                </button>
+                <h4>{movie.title}</h4>
+                <p>{movie.release_date}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Hollywood Movies */}
       <div className="movies-container">
         <h2>Hollywood Movies</h2>
@@ -226,6 +269,7 @@ function MovieExplorer() {
               ) : (
                 <div className="movie-placeholder" />
               )}
+              <button onClick={() => addToFavorites(movie)} style={{ marginBottom: 8 }}>❤️</button>
               <h4>{movie.title}</h4>
               <p>{movie.release_date}</p>
             </div>
@@ -244,6 +288,7 @@ function MovieExplorer() {
               ) : (
                 <div className="movie-placeholder" />
               )}
+              <button onClick={() => addToFavorites(movie)} style={{ marginBottom: 8 }}>❤️</button>
               <h4>{movie.title}</h4>
               <p>{movie.release_date}</p>
             </div>
@@ -252,6 +297,8 @@ function MovieExplorer() {
       </div>
     </div>
   );
+
+
 }
 
 export default MovieExplorer;
