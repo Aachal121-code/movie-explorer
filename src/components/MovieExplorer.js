@@ -166,7 +166,8 @@ function MovieExplorer() {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [filterYear, setFilterYear] = useState("");
 
   // Simulate search with static data
   const searchMovies = (e) => {
@@ -219,7 +220,8 @@ function MovieExplorer() {
           <h2>Search Results</h2>
           <div className="movies-list">
             {movies.map(movie => (
-              <div key={movie.id} className="movie-card">
+              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+                style={{ cursor: "pointer" }}>
                 {movie.poster_path ? (
                   <img src={movie.poster_path} alt={movie.title} />
                 ) : (
@@ -238,7 +240,8 @@ function MovieExplorer() {
           <h2>Favorites</h2>
           <div className="movies-list">
             {favorites.map(movie => (
-              <div key={movie.id} className="movie-card">
+              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+                style={{ cursor: "pointer" }}>
                 {movie.poster_path ? (
                   <img src={movie.poster_path} alt={movie.title} />
                 ) : (
@@ -247,7 +250,7 @@ function MovieExplorer() {
                 <button
                   onClick={() => removeFromFavorites(movie)}
                   style={{ marginBottom: 8 }}
-                > 
+                >
                   ❌ Remove
                 </button>
                 <h4>{movie.title}</h4>
@@ -259,11 +262,29 @@ function MovieExplorer() {
       )}
 
       {/* Hollywood Movies */}
+      <div style={{ margin: "16px 0" }}>
+        <label>
+          Filter Bollywood by Year:{" "}
+          <select value={filterYear} onChange={e => setFilterYear(e.target.value)}>
+            <option value="">All</option>
+            <option value="2009">2009</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2014">2014</option>
+            <option value="2016">2016</option>
+            <option value="2019">2019</option>
+            <option value="1995">1995</option>
+            <option value="2007">2007</option>
+          </select>
+        </label>
+      </div>
       <div className="movies-container">
         <h2>Hollywood Movies</h2>
         <div className="movies-list">
-          {demoNowPlaying.map(movie => (
-            <div key={movie.id} className="movie-card">
+          {demoNowPlaying.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
+          .map(movie => (
+            <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+              style={{ cursor: "pointer" }}>
               {movie.poster_path ? (
                 <img src={movie.poster_path} alt={movie.title} />
               ) : (
@@ -278,11 +299,29 @@ function MovieExplorer() {
       </div>
 
       {/* Bollywood Movies */}
+      <div style={{ margin: "16px 0" }}>
+        <label>
+          Filter Bollywood by Year:{" "}
+          <select value={filterYear} onChange={e => setFilterYear(e.target.value)}>
+            <option value="">All</option>
+            <option value="2009">2009</option>
+            <option value="2011">2011</option>
+            <option value="2012">2012</option>
+            <option value="2014">2014</option>
+            <option value="2016">2016</option>
+            <option value="2019">2019</option>
+            <option value="1995">1995</option>
+            <option value="2007">2007</option>
+          </select>
+        </label>
+      </div>
       <div className="movies-container">
         <h2>Bollywood Movies</h2>
         <div className="movies-list">
-          {bollywoodMovies.map(movie => (
-            <div key={movie.id} className="movie-card">
+          {bollywoodMovies.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
+          .map(movie => (
+            <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+              style={{ cursor: "pointer" }}>
               {movie.poster_path ? (
                 <img src={movie.poster_path} alt={movie.title} />
               ) : (
@@ -295,6 +334,44 @@ function MovieExplorer() {
           ))}
         </div>
       </div>
+      {selectedMovie && (
+        <div
+          className="modal"
+          style={{
+            position: "fixed",
+            top: 0, left: 0, right: 0, bottom: 0,
+            background: "rgba(0,0,0,0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000
+          }}
+          onClick={() => setSelectedMovie(null)}
+        >
+          <div
+            className="modal-content"
+            style={{
+              background: "#fff",
+              borderRadius: 12,
+              padding: 24,
+              minWidth: 280,
+              maxWidth: 350,
+              boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
+              textAlign: "center"
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <img
+              src={selectedMovie.poster_path}
+              alt={selectedMovie.title}
+              style={{ width: "100%", borderRadius: 8, marginBottom: 16 }}
+            />
+            <h3>{selectedMovie.title}</h3>
+            <p>Release Date: {selectedMovie.release_date}</p>
+            <button onClick={() => setSelectedMovie(null)} style={{ marginTop: 12 }}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 
