@@ -116,49 +116,49 @@ const bollywoodMovies = [
     id: 101,
     title: "3 Idiots",
     release_date: "2009-12-25",
-    poster_path: "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg"
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"
   },
   {
     id: 102,
     title: "Dangal",
     release_date: "2016-12-23",
-    poster_path: "https://m.media-amazon.com/images/I/81A-mvlo+QL._AC_SY679_.jpg"
-  },
-  {
-    id: 103,
-    title: "Zindagi Na Milegi Dobara",
-    release_date: "2011-07-15",
-    poster_path: "https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SY679_.jpg"
-  },
-  {
-    id: 104,
-    title: "Queen",
-    release_date: "2014-03-07",
-    poster_path: "https://m.media-amazon.com/images/I/81l3rZK4lnL._AC_SY679_.jpg"
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/99/Dangal_Poster.jpg"
   },
   {
     id: 105,
     title: "Barfi!",
     release_date: "2012-09-14",
-    poster_path: "https://m.media-amazon.com/images/I/81eA5VnXNlL._AC_SY679_.jpg"
-  },
-  {
-    id: 106,
-    title: "Gully Boy",
-    release_date: "2019-02-14",
-    poster_path: "https://m.media-amazon.com/images/I/81pZ9h6r5lL._AC_SY679_.jpg"
-  },
-  {
-    id: 107,
-    title: "Taare Zameen Par",
-    release_date: "2007-12-21",
-    poster_path: "https://m.media-amazon.com/images/I/71Q0A6lK4lL._AC_SY679_.jpg"
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/2e/Barfi%21_poster.jpg"
   },
   {
     id: 108,
     title: "Dilwale Dulhania Le Jayenge",
     release_date: "1995-10-20",
-    poster_path: "https://m.media-amazon.com/images/I/81Vw5Zl8J-L._AC_SY679_.jpg"
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/80/Dilwale_Dulhania_Le_Jayenge_poster.jpg"
+  },
+  {
+    id: 103,
+    title: "Zindagi Na Milegi Dobara",
+    release_date: "2011-07-15",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/3/3c/Zindaginamilegidobara.jpg"
+  },
+  {
+    id: 104,
+    title: "Queen",
+    release_date: "2014-03-07",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/22/QueenMoviePoster7thMarch.jpg"
+  },
+  {
+    id: 106,
+    title: "Gully Boy",
+    release_date: "2019-02-14",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/90/Gully_Boy_poster.jpg"
+  },
+  {
+    id: 107,
+    title: "Taare Zameen Par",
+    release_date: "2007-12-21",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/8c/Taare_Zameen_Par.jpg"
   }
 ];
 
