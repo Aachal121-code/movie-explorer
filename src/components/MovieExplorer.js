@@ -248,7 +248,7 @@ function MovieExplorer() {
                   <div className="movie-placeholder" />
                 )}
                 <button
-                  onClick={() => removeFromFavorites(movie)}
+                  onClick={e => { e.stopPropagation(); removeFromFavorites(movie); }}
                   style={{ marginBottom: 8 }}
                 >
                   ❌ Remove
@@ -282,19 +282,20 @@ function MovieExplorer() {
         <h2>Hollywood Movies</h2>
         <div className="movies-list">
           {demoNowPlaying.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
-          .map(movie => (
-            <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-              style={{ cursor: "pointer" }}>
-              {movie.poster_path ? (
-                <img src={movie.poster_path} alt={movie.title} />
-              ) : (
-                <div className="movie-placeholder" />
-              )}
-              <button onClick={() => addToFavorites(movie)} style={{ marginBottom: 8 }}>❤️</button>
-              <h4>{movie.title}</h4>
-              <p>{movie.release_date}</p>
-            </div>
-          ))}
+            .map(movie => (
+              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+                style={{ cursor: "pointer" }}>
+                {movie.poster_path ? (
+                  <img src={movie.poster_path} alt={movie.title} />
+                ) : (
+                  <div className="movie-placeholder" />
+                )}
+                <button onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
+                  style={{ marginBottom: 8 }}>❤️</button>
+                <h4>{movie.title}</h4>
+                <p>{movie.release_date}</p>
+              </div>
+            ))}
         </div>
       </div>
 
@@ -319,19 +320,20 @@ function MovieExplorer() {
         <h2>Bollywood Movies</h2>
         <div className="movies-list">
           {bollywoodMovies.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
-          .map(movie => (
-            <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-              style={{ cursor: "pointer" }}>
-              {movie.poster_path ? (
-                <img src={movie.poster_path} alt={movie.title} />
-              ) : (
-                <div className="movie-placeholder" />
-              )}
-              <button onClick={() => addToFavorites(movie)} style={{ marginBottom: 8 }}>❤️</button>
-              <h4>{movie.title}</h4>
-              <p>{movie.release_date}</p>
-            </div>
-          ))}
+            .map(movie => (
+              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+                style={{ cursor: "pointer" }}>
+                {movie.poster_path ? (
+                  <img src={movie.poster_path} alt={movie.title} />
+                ) : (
+                  <div className="movie-placeholder" />
+                )}
+                <button onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
+                  style={{ marginBottom: 8 }}>❤️</button>
+                <h4>{movie.title}</h4>
+                <p>{movie.release_date}</p>
+              </div>
+            ))}
         </div>
       </div>
       {selectedMovie && (
