@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-// Demo data for "Now Playing" (Hollywood)
-const demoNowPlaying = [
+// 10 Hollywood movies (static)
+const hollywoodMovies = [
   {
     id: 1,
     title: "Avengers: Endgame",
@@ -59,58 +59,12 @@ const demoNowPlaying = [
   {
     id: 10,
     title: "Inception",
-    release_date: "2009-12-25",
-    poster_path: "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg"
+    release_date: "2010-07-16",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/7/7f/Inception_ver3.jpg"
   }
 ];
 
-// Demo data for search results
-const demoSearch = [
-  {
-    id: 9,
-    title: "Avengers: Endgame",
-    release_date: "2019-04-26",
-    poster_path: "https://image.tmdb.org/t/p/w200/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg"
-  },
-  {
-    id: 10,
-    title: "Avatar",
-    release_date: "2009-12-18",
-    poster_path: "https://image.tmdb.org/t/p/w200/6EiRUJpuoeQPghrs3YNktfnqOVh.jpg"
-  },
-  {
-    id: 11,
-    title: "Titanic",
-    release_date: "1997-12-19",
-    poster_path: "https://image.tmdb.org/t/p/w200/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
-  },
-  {
-    id: 12,
-    title: "The Matrix",
-    release_date: "1999-03-31",
-    poster_path: "https://image.tmdb.org/t/p/w200/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
-  },
-  {
-    id: 13,
-    title: "The Godfather",
-    release_date: "1972-03-24",
-    poster_path: "https://image.tmdb.org/t/p/w200/3bhkrj58Vtu7enYsRolD1fZdja1.jpg"
-  },
-  {
-    id: 14,
-    title: "Pulp Fiction",
-    release_date: "1994-10-14",
-    poster_path: "https://image.tmdb.org/t/p/w200/dM2w364MScsjFf8pfMbaWUcWrR.jpg"
-  },
-  {
-    id: 15,
-    title: "Gladiator",
-    release_date: "2000-05-05",
-    poster_path: "https://image.tmdb.org/t/p/w200/pRn3TJHbAqCAO7V1C0g5xw8AU8Y.jpg"
-  }
-];
-
-// Demo data for Bollywood movies
+// 10 Bollywood movies (static)
 const bollywoodMovies = [
   {
     id: 101,
@@ -125,18 +79,6 @@ const bollywoodMovies = [
     poster_path: "https://upload.wikimedia.org/wikipedia/en/9/99/Dangal_Poster.jpg"
   },
   {
-    id: 105,
-    title: "Barfi!",
-    release_date: "2012-09-14",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/2e/Barfi%21_poster.jpg"
-  },
-  {
-    id: 108,
-    title: "Dilwale Dulhania Le Jayenge",
-    release_date: "1995-10-20",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/80/Dilwale_Dulhania_Le_Jayenge_poster.jpg"
-  },
-  {
     id: 103,
     title: "Zindagi Na Milegi Dobara",
     release_date: "2011-07-15",
@@ -149,6 +91,12 @@ const bollywoodMovies = [
     poster_path: "https://upload.wikimedia.org/wikipedia/en/2/22/QueenMoviePoster7thMarch.jpg"
   },
   {
+    id: 105,
+    title: "Barfi!",
+    release_date: "2012-09-14",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/2e/Barfi%21_poster.jpg"
+  },
+  {
     id: 106,
     title: "Gully Boy",
     release_date: "2019-02-14",
@@ -159,6 +107,88 @@ const bollywoodMovies = [
     title: "Taare Zameen Par",
     release_date: "2007-12-21",
     poster_path: "https://upload.wikimedia.org/wikipedia/en/8/8c/Taare_Zameen_Par.jpg"
+  },
+  {
+    id: 108,
+    title: "Dilwale Dulhania Le Jayenge",
+    release_date: "1995-10-20",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/80/Dilwale_Dulhania_Le_Jayenge_poster.jpg"
+  },
+  {
+    id: 109,
+    title: "Andhadhun",
+    release_date: "2018-10-05",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/6d/Andhadhun_poster.jpg"
+  },
+  {
+    id: 110,
+    title: "Piku",
+    release_date: "2015-05-08",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/8c/Piku_poster.jpg"
+  }
+];
+
+// 10 Other Language movies (static, e.g. Korean, French, Japanese, etc.)
+const otherMovies = [
+  {
+    id: 201,
+    title: "Your Name",
+    release_date: "2016-08-26",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/0/0b/Your_Name_poster.png"
+  },
+  {
+    id: 202,
+    title: "Spirited Away",
+    release_date: "2001-07-20",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG"
+  },
+  {
+    id: 203,
+    title: "Parasite",
+    release_date: "2019-05-30",
+    poster_path: "https://image.tmdb.org/t/p/w200/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+  },
+  {
+    id: 204,
+    title: "Amélie",
+    release_date: "2001-04-25",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/5/53/Amelie_poster.jpg"
+  },
+  {
+    id: 205,
+    title: "Pan's Labyrinth",
+    release_date: "2006-10-11",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/67/Pan%27s_Labyrinth.jpg"
+  },
+  {
+    id: 206,
+    title: "Crouching Tiger, Hidden Dragon",
+    release_date: "2000-07-06",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/9e/Crouching_tiger_hidden_dragon_poster.jpg"
+  },
+  {
+    id: 207,
+    title: "Roma",
+    release_date: "2018-08-30",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/b/b7/Roma_%282018_film%29.png"
+  },
+  {
+    id: 208,
+    title: "The Intouchables",
+    release_date: "2011-11-02",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/65/The_Intouchables.jpg"
+  },
+  {
+    id: 209,
+    title: "Oldboy",
+    release_date: "2003-11-21",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/67/Oldboy2013Poster.jpg"
+  },
+  {
+    id: 210,
+    title: "Shoplifters",
+    release_date: "2018-06-08",
+    poster_path: "https://upload.wikimedia.org/wikipedia/en/4/4b/Shoplifters_%282018_film%29.png"
   }
 ];
 
@@ -167,26 +197,46 @@ function MovieExplorer() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [filterYear, setFilterYear] = useState("");
-
-  // Simulate search with static data
-  const searchMovies = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      // Simple search: filter demoSearch by title
-      const results = demoSearch.filter(movie =>
-        movie.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setMovies(results);
-      setLoading(false);
-    }, 600); // Simulate network delay
-  };
-
+  const [hollywoodYear, setHollywoodYear] = useState("");
+  const [bollywoodYear, setBollywoodYear] = useState("");
+  const [otherYear, setOtherYear] = useState("");
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   );
+  useEffect(() => {
+    if (!query.trim()) setMovies([]);
+  }, [query]);
 
+  const TMDB_API_KEY = "4238d5ea"; // Replace with your own TMDb API key
+
+  // Search movies from TMDb
+  const searchMovies = async (e) => {
+  e.preventDefault();
+  if (!query.trim()) return;
+  setLoading(true);
+
+  try {
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
+    );
+    const data = await res.json();
+    setMovies(
+      (data.results || []).map(movie => ({
+        id: movie.id,
+        title: movie.title,
+        release_date: movie.release_date,
+        poster_path: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+          : null
+      }))
+    );
+  } catch (err) {
+    setMovies([]);
+  }
+  setLoading(false);
+};
+
+  // Favorites logic
   const addToFavorites = (movie) => {
     if (!favorites.find(fav => fav.id === movie.id)) {
       const updated = [...favorites, movie];
@@ -200,6 +250,40 @@ function MovieExplorer() {
     localStorage.setItem('favorites', JSON.stringify(updated));
   };
 
+  // Helper for horizontal scrollable lists
+  const renderMovieList = (list, showLike = true, showRemove = false) => (
+    <div className="movies-list">
+      {list.map(movie => (
+        <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
+          style={{ cursor: "pointer" }}>
+          {movie.poster_path ? (
+            <img src={movie.poster_path} alt={movie.title} />
+          ) : (
+            <div className="movie-placeholder" />
+          )}
+          {showLike && (
+            <button
+              onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
+              style={{ marginBottom: 8 }}
+            >
+              ❤️
+            </button>
+          )}
+          {showRemove && (
+            <button
+              onClick={e => { e.stopPropagation(); removeFromFavorites(movie); }}
+              style={{ marginBottom: 8 }}
+            >
+              ❌ Remove
+            </button>
+          )}
+          <h4>{movie.title}</h4>
+          <p>{movie.release_date}</p>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div style={{ width: "100%" }}>
       <form className="search-form" onSubmit={searchMovies}>
@@ -209,133 +293,85 @@ function MovieExplorer() {
           value={query}
           onChange={e => setQuery(e.target.value)}
         />
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading || !query.trim()}>
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
 
-      {/* Search Results FIRST */}
+      {/* Search Results */}
       {movies.length > 0 && (
         <div className="movies-container">
           <h2>Search Results</h2>
-          <div className="movies-list">
-            {movies.map(movie => (
-              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-                style={{ cursor: "pointer" }}>
-                {movie.poster_path ? (
-                  <img src={movie.poster_path} alt={movie.title} />
-                ) : (
-                  <div className="movie-placeholder" />
-                )}
-                <h4>{movie.title}</h4>
-                <p>{movie.release_date}</p>
-              </div>
-            ))}
-          </div>
+          {renderMovieList(movies)}
         </div>
       )}
 
+      {/* Favorites */}
       {favorites.length > 0 && (
         <div className="movies-container">
           <h2>Favorites</h2>
-          <div className="movies-list">
-            {favorites.map(movie => (
-              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-                style={{ cursor: "pointer" }}>
-                {movie.poster_path ? (
-                  <img src={movie.poster_path} alt={movie.title} />
-                ) : (
-                  <div className="movie-placeholder" />
-                )}
-                <button
-                  onClick={e => { e.stopPropagation(); removeFromFavorites(movie); }}
-                  style={{ marginBottom: 8 }}
-                >
-                  ❌ Remove
-                </button>
-                <h4>{movie.title}</h4>
-                <p>{movie.release_date}</p>
-              </div>
-            ))}
-          </div>
+          {renderMovieList(favorites, false, true)}
         </div>
       )}
 
       {/* Hollywood Movies */}
-      <div style={{ margin: "16px 0" }}>
-        <label>
-          Filter Bollywood by Year:{" "}
-          <select value={filterYear} onChange={e => setFilterYear(e.target.value)}>
-            <option value="">All</option>
-            <option value="2009">2009</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2014">2014</option>
-            <option value="2016">2016</option>
-            <option value="2019">2019</option>
-            <option value="1995">1995</option>
-            <option value="2007">2007</option>
-          </select>
-        </label>
-      </div>
       <div className="movies-container">
         <h2>Hollywood Movies</h2>
-        <div className="movies-list">
-          {demoNowPlaying.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
-            .map(movie => (
-              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-                style={{ cursor: "pointer" }}>
-                {movie.poster_path ? (
-                  <img src={movie.poster_path} alt={movie.title} />
-                ) : (
-                  <div className="movie-placeholder" />
-                )}
-                <button onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
-                  style={{ marginBottom: 8 }}>❤️</button>
-                <h4>{movie.title}</h4>
-                <p>{movie.release_date}</p>
-              </div>
-            ))}
+        <div style={{ margin: "16px 0" }}>
+          <label>
+            Filter by Year:{" "}
+            <select value={hollywoodYear} onChange={e => setHollywoodYear(e.target.value)}>
+              <option value="">All</option>
+              {[...new Set(hollywoodMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
+                <option key={year} value={year}>{year}</option>
+              )}
+            </select>
+          </label>
         </div>
+        {renderMovieList(
+          hollywoodMovies.filter(m => !hollywoodYear || m.release_date.startsWith(hollywoodYear))
+        )}
       </div>
 
       {/* Bollywood Movies */}
-      <div style={{ margin: "16px 0" }}>
-        <label>
-          Filter Bollywood by Year:{" "}
-          <select value={filterYear} onChange={e => setFilterYear(e.target.value)}>
-            <option value="">All</option>
-            <option value="2009">2009</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2014">2014</option>
-            <option value="2016">2016</option>
-            <option value="2019">2019</option>
-            <option value="1995">1995</option>
-            <option value="2007">2007</option>
-          </select>
-        </label>
-      </div>
       <div className="movies-container">
         <h2>Bollywood Movies</h2>
-        <div className="movies-list">
-          {bollywoodMovies.filter(movie => !filterYear || movie.release_date.startsWith(filterYear))
-            .map(movie => (
-              <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-                style={{ cursor: "pointer" }}>
-                {movie.poster_path ? (
-                  <img src={movie.poster_path} alt={movie.title} />
-                ) : (
-                  <div className="movie-placeholder" />
-                )}
-                <button onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
-                  style={{ marginBottom: 8 }}>❤️</button>
-                <h4>{movie.title}</h4>
-                <p>{movie.release_date}</p>
-              </div>
-            ))}
+        <div style={{ margin: "16px 0" }}>
+          <label>
+            Filter by Year:{" "}
+            <select value={bollywoodYear} onChange={e => setBollywoodYear(e.target.value)}>
+              <option value="">All</option>
+              {[...new Set(bollywoodMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
+                <option key={year} value={year}>{year}</option>
+              )}
+            </select>
+          </label>
         </div>
+        {renderMovieList(
+          bollywoodMovies.filter(m => !bollywoodYear || m.release_date.startsWith(bollywoodYear))
+        )}
       </div>
+
+      {/* Other Language Movies */}
+      <div className="movies-container">
+        <h2>Other</h2>
+        <div style={{ margin: "16px 0" }}>
+          <label>
+            Filter by Year:{" "}
+            <select value={otherYear} onChange={e => setOtherYear(e.target.value)}>
+              <option value="">All</option>
+              {[...new Set(otherMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
+                <option key={year} value={year}>{year}</option>
+              )}
+            </select>
+          </label>
+        </div>
+        {renderMovieList(
+          otherMovies.filter(m => !otherYear || m.release_date.startsWith(otherYear))
+        )}
+      </div>
+
+      {/* Movie Details Modal */}
       {selectedMovie && (
         <div
           className="modal"
@@ -376,8 +412,6 @@ function MovieExplorer() {
       )}
     </div>
   );
-
-
 }
 
 export default MovieExplorer;
