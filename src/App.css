@@ -171,6 +171,7 @@ body, .main-bg {
   gap: 12px;
   margin-bottom: 30px;
   justify-content: center;
+  margin-top: 20px;
 }
 .search-form input {
   padding: 8px 14px;
