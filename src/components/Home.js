@@ -1,46 +1,61 @@
 import React from "react";
+import "./Home.css";
 
 function Home({ onLoginClick, user }) {
   return (
-    <div style={{ padding: 24, maxWidth: 700, margin: "0 auto" }}>
-      <h1>Welcome to Movie Explorer</h1>
-      <p>
-        <strong>Movie Explorer</strong> is your one-stop platform to discover, explore, and enjoy movies and songs!
-      </p>
-      <h2>Features</h2>
-      <ul>
-        <li>
-          <strong>Movies Section:</strong> Browse Hollywood, Bollywood, and other language movies. Search for your favorite movies, view details, and add them to your favorites.
-        </li>
-        <li>
-          <strong>Songs Section:</strong> Listen to trending songs and download your favorites for offline enjoyment.
-        </li>
-        <li>
-          <strong>Favorites:</strong> Save your favorite movies and songs for quick access anytime.
-        </li>
-        <li>
-          <strong>Profile:</strong> Manage your account and personalize your experience.
-        </li>
-      </ul>
-      {!user && (
-        <div style={{ marginTop: 32 }}>
-          <h3>Sign In to Get Started</h3>
-          <button
-            style={{
-              padding: "10px 24px",
-              fontSize: "1.1rem",
-              background: "#1976d2",
-              color: "#fff",
-              border: "none",
-              borderRadius: 6,
-              cursor: "pointer"
-            }}
-            onClick={onLoginClick}
-          >
-            Sign In
-          </button>
+    <div>
+      {/* Hero Section with background image */}
+      <div className="home-bg">
+        <div className="home-overlay" />
+        <div className="home-hero-content">
+          <h1 className="home-title">
+            Welcome to <span>Movie Explorer</span>
+          </h1>
         </div>
-      )}
+      </div>
+
+      {/* Info Section as box container */}
+      <div className="home-info-container">
+        <div className="home-info-content">
+          <h2>About Movie Explorer</h2>
+          <div className="home-sections">
+            <div className="home-card">
+              <h3>Movies Section</h3>
+              <p>
+                Browse Hollywood, Bollywood, and other language movies. Search for your favorite movies, view details, and add them to your favorites.
+              </p>
+            </div>
+            <div className="home-card">
+              <h3>Songs Section</h3>
+              <p>
+                Listen to trending songs and download your favorites for offline enjoyment.
+              </p>
+            </div>
+            <div className="home-card">
+              <h3>Favorites</h3>
+              <p>
+                Save your favorite movies and songs for quick access anytime.
+              </p>
+            </div>
+            <div className="home-card">
+              <h3>Profile</h3>
+              <p>
+                Manage your account and personalize your experience.
+              </p>
+            </div>
+          </div>
+          {!user && (
+            <div style={{ marginTop: 32 }}>
+              <button
+                className="home-signin-btn"
+                onClick={onLoginClick}
+              >
+                Sign In
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
