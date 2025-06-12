@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import MovieList from "./MovieList";
 
 // 10 Hollywood movies (static)
 const hollywoodMovies = [
@@ -128,7 +129,7 @@ const bollywoodMovies = [
   }
 ];
 
-// 10 Other Language movies (static, e.g. Korean, French, Japanese, etc.)
+// 10 Other Language movies (static)
 const otherMovies = [
   {
     id: 201,
@@ -203,38 +204,37 @@ function MovieExplorer() {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   );
+
   useEffect(() => {
     if (!query.trim()) setMovies([]);
   }, [query]);
 
-  const TMDB_API_KEY = "4238d5ea"; // Replace with your own TMDb API key
+  const OMDB_API_KEY = "4238d5ea"; // Your OMDb API key
 
-  // Search movies from TMDb
+  // Search movies from OMDb
   const searchMovies = async (e) => {
-  e.preventDefault();
-  if (!query.trim()) return;
-  setLoading(true);
+    e.preventDefault();
+    if (!query.trim()) return;
+    setLoading(true);
 
-  try {
-    const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}`
-    );
-    const data = await res.json();
-    setMovies(
-      (data.results || []).map(movie => ({
-        id: movie.id,
-        title: movie.title,
-        release_date: movie.release_date,
-        poster_path: movie.poster_path
-          ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-          : null
-      }))
-    );
-  } catch (err) {
-    setMovies([]);
-  }
-  setLoading(false);
-};
+    try {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${encodeURIComponent(query)}`
+      );
+      const data = await res.json();
+      setMovies(
+        (data.Search || []).map(movie => ({
+          id: movie.imdbID,
+          title: movie.Title,
+          release_date: movie.Year,
+          poster_path: movie.Poster !== "N/A" ? movie.Poster : null
+        }))
+      );
+    } catch (err) {
+      setMovies([]);
+    }
+    setLoading(false);
+  };
 
   // Favorites logic
   const addToFavorites = (movie) => {
@@ -249,40 +249,6 @@ function MovieExplorer() {
     setFavorites(updated);
     localStorage.setItem('favorites', JSON.stringify(updated));
   };
-
-  // Helper for horizontal scrollable lists
-  const renderMovieList = (list, showLike = true, showRemove = false) => (
-    <div className="movies-list">
-      {list.map(movie => (
-        <div key={movie.id} className="movie-card" onClick={() => setSelectedMovie(movie)}
-          style={{ cursor: "pointer" }}>
-          {movie.poster_path ? (
-            <img src={movie.poster_path} alt={movie.title} />
-          ) : (
-            <div className="movie-placeholder" />
-          )}
-          {showLike && (
-            <button
-              onClick={e => { e.stopPropagation(); addToFavorites(movie); }}
-              style={{ marginBottom: 8 }}
-            >
-              ❤️
-            </button>
-          )}
-          {showRemove && (
-            <button
-              onClick={e => { e.stopPropagation(); removeFromFavorites(movie); }}
-              style={{ marginBottom: 8 }}
-            >
-              ❌ Remove
-            </button>
-          )}
-          <h4>{movie.title}</h4>
-          <p>{movie.release_date}</p>
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <div style={{ width: "100%" }}>
@@ -302,7 +268,14 @@ function MovieExplorer() {
       {movies.length > 0 && (
         <div className="movies-container">
           <h2>Search Results</h2>
-          {renderMovieList(movies)}
+          <MovieList
+            list={movies}
+            onCardClick={setSelectedMovie}
+            onLike={addToFavorites}
+            onRemove={removeFromFavorites}
+            showLike={true}
+            showRemove={false}
+          />
         </div>
       )}
 
@@ -310,7 +283,14 @@ function MovieExplorer() {
       {favorites.length > 0 && (
         <div className="movies-container">
           <h2>Favorites</h2>
-          {renderMovieList(favorites, false, true)}
+          <MovieList
+            list={favorites}
+            onCardClick={setSelectedMovie}
+            onLike={addToFavorites}
+            onRemove={removeFromFavorites}
+            showLike={false}
+            showRemove={true}
+          />
         </div>
       )}
 
@@ -328,9 +308,14 @@ function MovieExplorer() {
             </select>
           </label>
         </div>
-        {renderMovieList(
-          hollywoodMovies.filter(m => !hollywoodYear || m.release_date.startsWith(hollywoodYear))
-        )}
+        <MovieList
+          list={hollywoodMovies.filter(m => !hollywoodYear || m.release_date.startsWith(hollywoodYear))}
+          onCardClick={setSelectedMovie}
+          onLike={addToFavorites}
+          onRemove={removeFromFavorites}
+          showLike={true}
+          showRemove={false}
+        />
       </div>
 
       {/* Bollywood Movies */}
@@ -347,9 +332,14 @@ function MovieExplorer() {
             </select>
           </label>
         </div>
-        {renderMovieList(
-          bollywoodMovies.filter(m => !bollywoodYear || m.release_date.startsWith(bollywoodYear))
-        )}
+        <MovieList
+          list={bollywoodMovies.filter(m => !bollywoodYear || m.release_date.startsWith(bollywoodYear))}
+          onCardClick={setSelectedMovie}
+          onLike={addToFavorites}
+          onRemove={removeFromFavorites}
+          showLike={true}
+          showRemove={false}
+        />
       </div>
 
       {/* Other Language Movies */}
@@ -366,9 +356,14 @@ function MovieExplorer() {
             </select>
           </label>
         </div>
-        {renderMovieList(
-          otherMovies.filter(m => !otherYear || m.release_date.startsWith(otherYear))
-        )}
+        <MovieList
+          list={otherMovies.filter(m => !otherYear || m.release_date.startsWith(otherYear))}
+          onCardClick={setSelectedMovie}
+          onLike={addToFavorites}
+          onRemove={removeFromFavorites}
+          showLike={true}
+          showRemove={false}
+        />
       </div>
 
       {/* Movie Details Modal */}
