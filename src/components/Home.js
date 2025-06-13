@@ -44,6 +44,12 @@ function Home({ onLoginClick, user }) {
                 Manage your account and personalize your experience.
               </p>
             </div>
+            <div className="home-card">
+              <h3>Discuss</h3>
+              <p>
+                Join the community discussions about your favorite movies and songs.
+              </p>
+            </div>
           </div>
           {!user && (
             <div style={{ marginTop: 32 }}>
