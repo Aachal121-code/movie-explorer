@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="main-container">
-      <Navbar setPage={setPage} />
+      <Navbar page={page} setPage={setPage} />
       {page === "home" && <Home />}
       {page === "movies" && <MovieExplorer />}
       {/* Add more pages as needed */}
