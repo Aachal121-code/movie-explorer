@@ -21,13 +21,13 @@ function Home({ onLoginClick, user }) {
           <h2>About MoView</h2>
           <div className="home-sections">
             <div className="home-card">
-              <h3>Movies Section</h3>
+              <h3>Movies</h3>
               <p>
                 Browse Hollywood, Bollywood, and other language movies. Search for your favorite movies, view details, and add them to your favorites.
               </p>
             </div>
             <div className="home-card">
-              <h3>Songs Section</h3>
+              <h3>Song</h3>
               <p>
                 Listen to trending songs and download your favorites for offline enjoyment.
               </p>
