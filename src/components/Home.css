@@ -27,13 +27,25 @@
   font-size: 2.5rem;
   font-weight: 800;
   color: #fff;
-  margin-bottom: 0;
+  margin-bottom: 2rem;
   letter-spacing: 2px;
+  line-height: 1.1;
   animation: fadeInDown 1.2s cubic-bezier(.68,-0.55,.27,1.55);
 }
 .home-title span {
   color: #ffeb3b;
   text-shadow: 0 2px 8px #0008;
+}
+
+.home-title-h3{
+  font-size: 2rem;
+  color: white;
+  font-weight: 500;
+  margin-top: 0.2rem;      /* Small space above h3 */
+  letter-spacing: 2px;
+  line-height: 1.1;        /* Minimum line height */
+  animation: fadeInDown 1.4s cubic-bezier(.68,-0.55,.27,1.55);
+
 }
 
 @keyframes fadeInDown {

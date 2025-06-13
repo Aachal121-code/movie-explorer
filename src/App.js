@@ -8,18 +8,31 @@ import './App.css';
 function App() {
   const [user, setUser] = useState(null);
   const [page, setPage] = useState("home");
-
-  if (!user) {
-    return <Login onLogin={setUser} />;
-  }
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <div className="main-container">
-      <Navbar page={page} setPage={setPage} />
-      {page === "home" && <Home />}
+      {!showLogin && <Navbar page={page} setPage={setPage} />}
+      {showLogin && (
+        <Login
+          onLogin={(userObj) => {
+            setUser(userObj);
+            setShowLogin(false);
+          }}
+          onBack={() => setShowLogin(false)}
+        />
+      )}
+      {!user && !showLogin && page === "home" && (
+        <Home
+          onLoginClick={() => setShowLogin(true)}
+          user={user}
+        />
+      )}
+      {user && page === "home" && <Home user={user} />}
       {page === "movies" && <MovieExplorer />}
-      {/* Add more pages as needed */}
+      {/* Add other pages as needed */}
     </div>
   );
 }
+
 export default App;

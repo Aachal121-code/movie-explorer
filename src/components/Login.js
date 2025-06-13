@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-function Login({ onLogin }) {
+function Login({ onLogin, onBack }) {
   const [flipped, setFlipped] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
 
@@ -36,6 +36,9 @@ function Login({ onLogin }) {
 
   return (
     <div className="auth-bg">
+      <button className="auth-back-btn" onClick={onBack}>
+        ← Back
+      </button>
       <div className={`auth-card${flipped ? " flipped" : ""}`}>
         {/* Sign In */}
         <div className="auth-card-face auth-card-front">

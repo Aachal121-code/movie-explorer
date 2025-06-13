@@ -172,3 +172,20 @@
   font-size: 1rem;
   text-decoration: underline;
 }
+
+.auth-back-btn {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: transparent;
+  border: none;
+  color: #1976d2;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.auth-back-btn:hover {
+  color: #125ea6;
+}

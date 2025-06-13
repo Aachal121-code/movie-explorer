@@ -9,15 +9,16 @@ function Home({ onLoginClick, user }) {
         <div className="home-overlay" />
         <div className="home-hero-content">
           <h1 className="home-title">
-            Welcome to <span>Movie Explorer</span>
+            Welcome to <span>MoView</span>
           </h1>
+          <h3 className="home-title-h3">Explore the world of Entertainment...</h3>
         </div>
       </div>
 
       {/* Info Section as box container */}
       <div className="home-info-container">
         <div className="home-info-content">
-          <h2>About Movie Explorer</h2>
+          <h2>About MoView</h2>
           <div className="home-sections">
             <div className="home-card">
               <h3>Movies Section</h3>
