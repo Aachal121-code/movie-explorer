@@ -7,7 +7,7 @@ const OMDB_API_KEY = "4238d5ea";
 
 // Categories using OMDb search queries
 const categories = [
-  { key: "hollywood", label: "Hollywood", query: "Hollywood" },
+  { key: "hollywood", label: "Hollywood", query: "Marvel" },
   { key: "bollywood", label: "Bollywood", query: "Hindi" },
   { key: "anime", label: "Anime", query: "Anime" },
   { key: "korean", label: "Korean", query: "Korean" },
@@ -21,6 +21,7 @@ function MovieExplorer() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [selectedMovieDetails, setSelectedMovieDetails] = useState(null);
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   );
@@ -48,6 +49,22 @@ function MovieExplorer() {
       }
     });
   }, []);
+
+  // Fetch full movie info from OMDb when selectedMovie changes
+  useEffect(() => {
+    if (!selectedMovie) {
+      setSelectedMovieDetails(null);
+      return;
+    }
+    async function fetchDetails() {
+      const res = await fetch(
+        `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${selectedMovie.id}&plot=full`
+      );
+      const data = await res.json();
+      setSelectedMovieDetails(data);
+    }
+    fetchDetails();
+  }, [selectedMovie]);
 
   // Search movies from OMDb
   useEffect(() => {
@@ -148,7 +165,7 @@ function MovieExplorer() {
       ))}
 
       {/* Movie Details Modal */}
-      {selectedMovie && (
+      {selectedMovieDetails && (
         <div
           className="modal"
           style={{
@@ -166,23 +183,52 @@ function MovieExplorer() {
             className="modal-content"
             style={{
               background: "#fff",
-              borderRadius: 12,
-              padding: 24,
-              minWidth: 280,
-              maxWidth: 350,
-              boxShadow: "0 4px 24px rgba(0,0,0,0.18)",
-              textAlign: "center"
+              borderRadius: 18,
+              padding: "32px 32px 24px 32px",
+              minWidth: 320,
+              maxWidth: 700,
+              width: "90vw",
+              position: "relative",
+              textAlign: "left",
+              maxHeight: "90vh",
+              overflowY: "auto",
+              boxShadow: "0 8px 32px rgba(25, 118, 210, 0.18), 0 2px 8px rgba(0,0,0,0.10)"
             }}
             onClick={e => e.stopPropagation()}
           >
-            <img
-              src={selectedMovie.poster_path || selectedMovie.poster}
-              alt={selectedMovie.title}
-              style={{ width: "100%", borderRadius: 8, marginBottom: 16 }}
-            />
-            <h3>{selectedMovie.title}</h3>
-            <p>Release Date: {selectedMovie.release_date || ""}</p>
-            <button onClick={() => setSelectedMovie(null)} style={{ marginTop: 12 }}>Close</button>
+            <button
+              className="modal-close-btn"
+              onClick={() => setSelectedMovie(null)}
+              title="Close"
+              style={{
+                position: "absolute",
+                top: 18,
+                right: 22,
+                background: "none",
+                border: "none",
+                fontSize: "2rem",
+                color: "#1976d2",
+                cursor: "pointer",
+                zIndex: 2
+              }}
+            >&times;</button>
+            <div style={{ display: "flex", gap: 24 }}>
+              <img
+                src={selectedMovieDetails.Poster !== "N/A" ? selectedMovieDetails.Poster : "https://via.placeholder.com/140x210?text=No+Image"}
+                alt={selectedMovieDetails.Title}
+                style={{ width: 180, borderRadius: 12, marginBottom: 16, flexShrink: 0 }}
+              />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <h3>{selectedMovieDetails.Title}</h3>
+                <p><b>Year:</b> {selectedMovieDetails.Year}</p>
+                <p><b>Genre:</b> {selectedMovieDetails.Genre}</p>
+                <p><b>Director:</b> {selectedMovieDetails.Director}</p>
+                <p><b>Actors:</b> {selectedMovieDetails.Actors}</p>
+                <p><b>Plot:</b> {selectedMovieDetails.Plot}</p>
+                <p><b>IMDB Rating:</b> {selectedMovieDetails.imdbRating}</p>
+                {/* Cast photos row can go here if you fetch cast info */}
+              </div>
+            </div>
           </div>
         </div>
       )}
