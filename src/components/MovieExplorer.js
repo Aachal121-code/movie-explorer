@@ -1,196 +1,19 @@
 import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList";
+import HorizontalMovieList from "./HorizontalMovieList";
 
-// 10 Hollywood movies (static)
-const hollywoodMovies = [
-  {
-    id: 1,
-    title: "Avengers: Endgame",
-    release_date: "2019-04-26",
-    poster_path: "https://image.tmdb.org/t/p/w200/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg"
-  },
-  {
-    id: 2,
-    title: "Avatar",
-    release_date: "2009-12-18",
-    poster_path: "https://image.tmdb.org/t/p/w200/6EiRUJpuoeQPghrs3YNktfnqOVh.jpg"
-  },
-  {
-    id: 3,
-    title: "The Dark Knight",
-    release_date: "2008-07-18",
-    poster_path: "https://image.tmdb.org/t/p/w200/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
-  },
-  {
-    id: 4,
-    title: "La La Land",
-    release_date: "2016-12-09",
-    poster_path: "https://image.tmdb.org/t/p/w200/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
-  },
-  {
-    id: 5,
-    title: "Joker",
-    release_date: "2019-10-04",
-    poster_path: "https://image.tmdb.org/t/p/w200/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
-  },
-  {
-    id: 6,
-    title: "Parasite",
-    release_date: "2019-05-30",
-    poster_path: "https://image.tmdb.org/t/p/w200/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
-  },
-  {
-    id: 7,
-    title: "Ford v Ferrari",
-    release_date: "2019-11-15",
-    poster_path: "https://image.tmdb.org/t/p/w200/6ApDtO7xaWAfPqfi2IARXIzj8QS.jpg"
-  },
-  {
-    id: 8,
-    title: "1917",
-    release_date: "2019-12-25",
-    poster_path: "https://image.tmdb.org/t/p/w200/iZf0KyrE25z1sage4SYFLCCrMi9.jpg"
-  },
-  {
-    id: 9,
-    title: "Forrest Gump",
-    release_date: "1994-07-06",
-    poster_path: "https://image.tmdb.org/t/p/w200/saHP97rTPS5eLmrLQEcANmKrsFl.jpg"
-  },
-  {
-    id: 10,
-    title: "Inception",
-    release_date: "2010-07-16",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/7/7f/Inception_ver3.jpg"
-  }
-];
+// OMDb API key
+const OMDB_API_KEY = "4238d5ea";
 
-// 10 Bollywood movies (static)
-const bollywoodMovies = [
-  {
-    id: 101,
-    title: "3 Idiots",
-    release_date: "2009-12-25",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg"
-  },
-  {
-    id: 102,
-    title: "Dangal",
-    release_date: "2016-12-23",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/99/Dangal_Poster.jpg"
-  },
-  {
-    id: 103,
-    title: "Zindagi Na Milegi Dobara",
-    release_date: "2011-07-15",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/3/3c/Zindaginamilegidobara.jpg"
-  },
-  {
-    id: 104,
-    title: "Queen",
-    release_date: "2014-03-07",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/22/QueenMoviePoster7thMarch.jpg"
-  },
-  {
-    id: 105,
-    title: "Barfi!",
-    release_date: "2012-09-14",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/2/2e/Barfi%21_poster.jpg"
-  },
-  {
-    id: 106,
-    title: "Gully Boy",
-    release_date: "2019-02-14",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/90/Gully_Boy_poster.jpg"
-  },
-  {
-    id: 107,
-    title: "Taare Zameen Par",
-    release_date: "2007-12-21",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/8c/Taare_Zameen_Par.jpg"
-  },
-  {
-    id: 108,
-    title: "Dilwale Dulhania Le Jayenge",
-    release_date: "1995-10-20",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/80/Dilwale_Dulhania_Le_Jayenge_poster.jpg"
-  },
-  {
-    id: 109,
-    title: "Andhadhun",
-    release_date: "2018-10-05",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/6d/Andhadhun_poster.jpg"
-  },
-  {
-    id: 110,
-    title: "Piku",
-    release_date: "2015-05-08",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/8/8c/Piku_poster.jpg"
-  }
-];
-
-// 10 Other Language movies (static)
-const otherMovies = [
-  {
-    id: 201,
-    title: "Your Name",
-    release_date: "2016-08-26",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/0/0b/Your_Name_poster.png"
-  },
-  {
-    id: 202,
-    title: "Spirited Away",
-    release_date: "2001-07-20",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG"
-  },
-  {
-    id: 203,
-    title: "Parasite",
-    release_date: "2019-05-30",
-    poster_path: "https://image.tmdb.org/t/p/w200/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
-  },
-  {
-    id: 204,
-    title: "Amélie",
-    release_date: "2001-04-25",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/5/53/Amelie_poster.jpg"
-  },
-  {
-    id: 205,
-    title: "Pan's Labyrinth",
-    release_date: "2006-10-11",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/67/Pan%27s_Labyrinth.jpg"
-  },
-  {
-    id: 206,
-    title: "Crouching Tiger, Hidden Dragon",
-    release_date: "2000-07-06",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/9/9e/Crouching_tiger_hidden_dragon_poster.jpg"
-  },
-  {
-    id: 207,
-    title: "Roma",
-    release_date: "2018-08-30",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/b/b7/Roma_%282018_film%29.png"
-  },
-  {
-    id: 208,
-    title: "The Intouchables",
-    release_date: "2011-11-02",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/65/The_Intouchables.jpg"
-  },
-  {
-    id: 209,
-    title: "Oldboy",
-    release_date: "2003-11-21",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/6/67/Oldboy2013Poster.jpg"
-  },
-  {
-    id: 210,
-    title: "Shoplifters",
-    release_date: "2018-06-08",
-    poster_path: "https://upload.wikimedia.org/wikipedia/en/4/4b/Shoplifters_%282018_film%29.png"
-  }
+// Categories using OMDb search queries
+const categories = [
+  { key: "hollywood", label: "Hollywood", query: "Hollywood" },
+  { key: "bollywood", label: "Bollywood", query: "Hindi" },
+  { key: "anime", label: "Anime", query: "Anime" },
+  { key: "korean", label: "Korean", query: "Korean" },
+  { key: "japanese", label: "Japanese", query: "Japanese" },
+  { key: "cartoon", label: "Cartoons", query: "Cartoon" },
+  { key: "chinese", label: "Chinese", query: "Chinese" }
 ];
 
 function MovieExplorer() {
@@ -198,20 +21,39 @@ function MovieExplorer() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [hollywoodYear, setHollywoodYear] = useState("");
-  const [bollywoodYear, setBollywoodYear] = useState("");
-  const [otherYear, setOtherYear] = useState("");
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem('favorites')) || []
   );
+  const [moviesByCategory, setMoviesByCategory] = useState({});
 
+  // Fetch movies for each category from OMDb
+  useEffect(() => {
+    categories.forEach(async (cat) => {
+      try {
+        const res = await fetch(
+          `https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${encodeURIComponent(cat.query)}`
+        );
+        const data = await res.json();
+        setMoviesByCategory(prev => ({
+          ...prev,
+          [cat.key]: (data.Search || []).slice(0, 12).map(m => ({
+            id: m.imdbID,
+            title: m.Title,
+            poster: m.Poster !== "N/A" ? m.Poster : "https://via.placeholder.com/140x210?text=No+Image",
+            type: m.Type
+          }))
+        }));
+      } catch (e) {
+        // Optionally handle error
+      }
+    });
+  }, []);
+
+  // Search movies from OMDb
   useEffect(() => {
     if (!query.trim()) setMovies([]);
   }, [query]);
 
-  const OMDB_API_KEY = "4238d5ea"; // Your OMDb API key
-
-  // Search movies from OMDb
   const searchMovies = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -252,6 +94,7 @@ function MovieExplorer() {
 
   return (
     <div style={{ width: "100%" }}>
+      {/* Search Bar */}
       <form className="search-form" onSubmit={searchMovies}>
         <input
           type="text"
@@ -294,77 +137,15 @@ function MovieExplorer() {
         </div>
       )}
 
-      {/* Hollywood Movies */}
-      <div className="movies-container">
-        <h2>Hollywood Movies</h2>
-        <div style={{ margin: "16px 0" }}>
-          <label>
-            Filter by Year:{" "}
-            <select value={hollywoodYear} onChange={e => setHollywoodYear(e.target.value)}>
-              <option value="">All</option>
-              {[...new Set(hollywoodMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
-                <option key={year} value={year}>{year}</option>
-              )}
-            </select>
-          </label>
-        </div>
-        <MovieList
-          list={hollywoodMovies.filter(m => !hollywoodYear || m.release_date.startsWith(hollywoodYear))}
+      {/* Horizontal Movie Lists for each category */}
+      {categories.map(cat => (
+        <HorizontalMovieList
+          key={cat.key}
+          title={cat.label}
+          items={moviesByCategory[cat.key] || []}
           onCardClick={setSelectedMovie}
-          onLike={addToFavorites}
-          onRemove={removeFromFavorites}
-          showLike={true}
-          showRemove={false}
         />
-      </div>
-
-      {/* Bollywood Movies */}
-      <div className="movies-container">
-        <h2>Bollywood Movies</h2>
-        <div style={{ margin: "16px 0" }}>
-          <label>
-            Filter by Year:{" "}
-            <select value={bollywoodYear} onChange={e => setBollywoodYear(e.target.value)}>
-              <option value="">All</option>
-              {[...new Set(bollywoodMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
-                <option key={year} value={year}>{year}</option>
-              )}
-            </select>
-          </label>
-        </div>
-        <MovieList
-          list={bollywoodMovies.filter(m => !bollywoodYear || m.release_date.startsWith(bollywoodYear))}
-          onCardClick={setSelectedMovie}
-          onLike={addToFavorites}
-          onRemove={removeFromFavorites}
-          showLike={true}
-          showRemove={false}
-        />
-      </div>
-
-      {/* Other Language Movies */}
-      <div className="movies-container">
-        <h2>Other</h2>
-        <div style={{ margin: "16px 0" }}>
-          <label>
-            Filter by Year:{" "}
-            <select value={otherYear} onChange={e => setOtherYear(e.target.value)}>
-              <option value="">All</option>
-              {[...new Set(otherMovies.map(m => m.release_date.slice(0, 4)))].map(year =>
-                <option key={year} value={year}>{year}</option>
-              )}
-            </select>
-          </label>
-        </div>
-        <MovieList
-          list={otherMovies.filter(m => !otherYear || m.release_date.startsWith(otherYear))}
-          onCardClick={setSelectedMovie}
-          onLike={addToFavorites}
-          onRemove={removeFromFavorites}
-          showLike={true}
-          showRemove={false}
-        />
-      </div>
+      ))}
 
       {/* Movie Details Modal */}
       {selectedMovie && (
@@ -395,12 +176,12 @@ function MovieExplorer() {
             onClick={e => e.stopPropagation()}
           >
             <img
-              src={selectedMovie.poster_path}
+              src={selectedMovie.poster_path || selectedMovie.poster}
               alt={selectedMovie.title}
               style={{ width: "100%", borderRadius: 8, marginBottom: 16 }}
             />
             <h3>{selectedMovie.title}</h3>
-            <p>Release Date: {selectedMovie.release_date}</p>
+            <p>Release Date: {selectedMovie.release_date || ""}</p>
             <button onClick={() => setSelectedMovie(null)} style={{ marginTop: 12 }}>Close</button>
           </div>
         </div>
