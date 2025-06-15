@@ -7,10 +7,11 @@ import MovieExplorer from "./components/MovieExplorer";
 function App() {
   return (
     <Router>
-      <Navbar /> {/* Your existing Navbar, unchanged */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Movies" element={<MovieExplorer />} />
+        <Route path="*" element={<div style={{padding: 40, textAlign: "center"}}><h2>404 - Page Not Found</h2></div>} />
       </Routes>
     </Router>
   );
