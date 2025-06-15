@@ -1,10 +1,9 @@
-// filepath: [MovieExplorer.js](http://_vscodecontentref_/0)
 import React, { useState, useEffect } from "react";
 import MovieList from "./MovieList";
 import HorizontalMovieList from "./HorizontalMovieList";
 import "./MovieExplorer.css";
 
-const TMDB_API_KEY = "YOUR_TMDB_API_KEY";
+const TMDB_API_KEY = "23890236526b9fd2f87bff1d1782f278"; // Replace with your real TMDB API key
 
 const categories = [
   { key: "hollywood", label: "Hollywood", language: "en" },
@@ -68,6 +67,8 @@ function MovieExplorer() {
       );
       const data = await res.json();
       setSelectedMovieDetails(data);
+      console.log("Selected Movie Details:", data);
+      // Set selected movie poster
 
       // Movie cast
       const castRes = await fetch(
