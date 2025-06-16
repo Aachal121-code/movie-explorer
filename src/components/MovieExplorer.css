@@ -97,35 +97,3 @@
   cursor: pointer;
   z-index: 2;
 }
-
-.cast-scroll-row {
-  display: flex;
-  overflow-x: auto;
-  gap: 18px;
-  margin: 18px 0 10px 0;
-  padding-bottom: 6px;
-}
-.cast-card {
-  min-width: 90px;
-  max-width: 90px;
-  text-align: center;
-  flex-shrink: 0;
-}
-.cast-card img {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 6px;
-  border: 2px solid #1976d2;
-  background: #eee;
-}
-.cast-card .cast-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #1976d2;
-}
-.cast-card .cast-role {
-  font-size: 0.8rem;
-  color: #888;
-}
