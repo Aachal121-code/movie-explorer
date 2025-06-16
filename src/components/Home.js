@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 
-const OMDB_API_KEY = "YOUR_OMDB_API_KEY"; // Replace with your OMDb API key
+const OMDB_API_KEY = "4238d5ea"; // Replace with your OMDb API key
 
 export default function Home() {
   const [posters, setPosters] = useState([]);
@@ -20,18 +20,26 @@ export default function Home() {
           all = all.concat(data.Search.map(m => m.Poster).filter(p => p && p !== "N/A"));
         }
       }
-      setPosters(all.slice(0, 30));
+      setPosters(all.slice(0, 18));
     };
     fetchPosters();
   }, []);
 
   return (
     <div className="home-root">
-      <div className="poster-grid-bg">
+      {/* Animated floating posters */}
+      <div className="animated-bg">
         {posters.map((poster, idx) => (
-          <div className="poster-cell" key={idx}>
-            <img src={poster} alt="Movie Poster" />
-          </div>
+          <img
+            key={idx}
+            src={poster}
+            alt="Movie Poster"
+            className={`floating-poster poster${idx % 6}`}
+            style={{
+              left: `${(idx % 6) * 16 + 5}%`,
+              animationDelay: `${(idx % 6) * 1.2}s`
+            }}
+          />
         ))}
       </div>
       <div className="home-container">
@@ -40,6 +48,29 @@ export default function Home() {
           Discover movies by language, search for your favorites, and explore cast details.<br />
           Use the search bar or browse by category on the Explore page!
         </p>
+      </div>
+      {/* Second Slide: Animated Info Boxes */}
+      <div className="info-slide-boxes">
+        <div className="info-box">
+          <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" className="info-box-icon" />
+          <h3>Powerful Search</h3>
+          <p>Find movies instantly by title, genre, or language using the OMDb API. Results appear in a beautiful horizontal scroll.</p>
+        </div>
+        <div className="info-box">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Like" className="info-box-icon" />
+          <h3>Favorites</h3>
+          <p>Like any movie to add it to your favorites. Your favorites are saved and always accessible in a dedicated row.</p>
+        </div>
+        <div className="info-box">
+          <img src="https://cdn-icons-png.flaticon.com/512/709/709496.png" alt="Info" className="info-box-icon" />
+          <h3>Movie Details</h3>
+          <p>Click the info button to see cast, plot, ratings, and more in a stylish modal. Explore every detail before you watch!</p>
+        </div>
+        <div className="info-box">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="Remove" className="info-box-icon" />
+          <h3>Easy Management</h3>
+          <p>Remove movies from your favorites with a single click. Your list stays organized and up to date.</p>
+        </div>
       </div>
     </div>
   );
