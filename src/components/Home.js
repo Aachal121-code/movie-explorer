@@ -1,70 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 
-function Home({ onLoginClick, user }) {
-  return (
-    <div>
-      {/* Hero Section with background image */}
-      <div className="home-bg">
-        <div className="home-overlay" />
-        <div className="home-hero-content">
-          <h1 className="home-title">
-            Welcome to <span>MoView</span>
-          </h1>
-          <h3 className="home-title-h3">Explore the world of Entertainment...</h3>
-        </div>
-      </div>
+const OMDB_API_KEY = "YOUR_OMDB_API_KEY"; // Replace with your OMDb API key
 
-      {/* Info Section as box container */}
-      <div className="home-info-container">
-        <div className="home-info-content">
-          <h2>About MoView</h2>
-          <div className="home-sections">
-            <div className="home-card">
-              <h3>Movies</h3>
-              <p>
-                Browse Hollywood, Bollywood, and other language movies. Search for your favorite movies, view details, and add them to your favorites.
-              </p>
-            </div>
-            <div className="home-card">
-              <h3>Song</h3>
-              <p>
-                Listen to trending songs and download your favorites for offline enjoyment.
-              </p>
-            </div>
-            <div className="home-card">
-              <h3>Favorites</h3>
-              <p>
-                Save your favorite movies and songs for quick access anytime.
-              </p>
-            </div>
-            <div className="home-card">
-              <h3>Profile</h3>
-              <p>
-                Manage your account and personalize your experience.
-              </p>
-            </div>
-            <div className="home-card">
-              <h3>Discuss</h3>
-              <p>
-                Join the community discussions about your favorite movies and songs.
-              </p>
-            </div>
+export default function Home() {
+  const [posters, setPosters] = useState([]);
+
+  useEffect(() => {
+    const fetchPosters = async () => {
+      const titles = [
+        "Avengers", "Inception", "Dangal", "Naruto", "Parasite",
+        "Your Name", "Tom and Jerry", "Crouching Tiger", "Interstellar", "Joker"
+      ];
+      let all = [];
+      for (let title of titles) {
+        const res = await fetch(`https://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${encodeURIComponent(title)}&type=movie`);
+        const data = await res.json();
+        if (data.Search) {
+          all = all.concat(data.Search.map(m => m.Poster).filter(p => p && p !== "N/A"));
+        }
+      }
+      setPosters(all.slice(0, 30));
+    };
+    fetchPosters();
+  }, []);
+
+  return (
+    <div className="home-root">
+      <div className="poster-grid-bg">
+        {posters.map((poster, idx) => (
+          <div className="poster-cell" key={idx}>
+            <img src={poster} alt="Movie Poster" />
           </div>
-          {!user && (
-            <div style={{ marginTop: 32 }}>
-              <button
-                className="home-signin-btn"
-                onClick={onLoginClick}
-              >
-                Sign In
-              </button>
-            </div>
-          )}
-        </div>
+        ))}
+      </div>
+      <div className="home-container">
+        <h1>Welcome to <span className="brand">Movie Explorer</span></h1>
+        <p>
+          Discover movies by language, search for your favorites, and explore cast details.<br />
+          Use the search bar or browse by category on the Explore page!
+        </p>
       </div>
     </div>
   );
 }
-
-export default Home;

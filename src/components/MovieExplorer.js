@@ -5,7 +5,7 @@ import "./MovieExplorer.css";
 const OMDB_API_KEY = "4238d5ea"; // Replace with your OMDb API key
 
 const categories = [
-  { key: "hollywood", label: "Hollywood", search: "avenger" },
+  { key: "hollywood", label: "Hollywood", search: "Avengers" },
   { key: "bollywood", label: "Bollywood", search: "hindi" },
   { key: "anime", label: "Anime", search: "Naruto" },
   { key: "korean", label: "Korean", search: "Parasite" },
@@ -140,23 +140,24 @@ function MovieExplorer() {
         </div>
       )}
 
+      {/* Always show all horizontal lists */}
       {categories.map(cat => (
-  <div className="horizontal-section" key={cat.key}>
-    <h2>{cat.label}</h2>
-    <div className="horizontal-list">
-      {(moviesByCategory[cat.key] || []).map(movie => (
-        <MovieCard
-          key={movie.imdbID}
-          movie={movie}
-          onInfo={setSelectedMovie}
-          onLike={addToFavorites}
-          onRemove={removeFromFavorites}
-          isFavorite={!!favorites.find(fav => fav.imdbID === movie.imdbID)}
-        />
+        <div className="horizontal-section" key={cat.key}>
+          <h2>{cat.label}</h2>
+          <div className="horizontal-list">
+            {(moviesByCategory[cat.key] || []).map(movie => (
+              <MovieCard
+                key={movie.imdbID}
+                movie={movie}
+                onInfo={setSelectedMovie}
+                onLike={addToFavorites}
+                onRemove={removeFromFavorites}
+                isFavorite={!!favorites.find(fav => fav.imdbID === movie.imdbID)}
+              />
+            ))}
+          </div>
+        </div>
       ))}
-    </div>
-  </div>
-))}
 
       {/* Movie Details Modal */}
       {selectedMovieDetails && (

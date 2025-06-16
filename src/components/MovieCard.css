@@ -1,7 +1,7 @@
 .movie-card {
   min-width: 140px;
   max-width: 140px;
-  background: #fafdff;
+  background: linear-gradient(120deg, #e3f0ff 0%, #fafdff 100%);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(25, 118, 210, 0.10);
   text-align: center;
@@ -10,7 +10,13 @@
   cursor: pointer;
   border: 1.5px solid #e3eafc;
   margin-bottom: 2px;
-  transition: box-shadow 0.22s, background 0.22s;
+  transition: box-shadow 0.22s, background 0.22s, transform 0.18s;
+}
+
+.movie-card:hover {
+  box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18), 0 2px 8px rgba(0,0,0,0.10);
+  transform: scale(1.05);
+  background: #e3f0ff;
 }
 
 .movie-card img {
