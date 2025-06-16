@@ -43,7 +43,7 @@ export default function Home() {
         ))}
       </div>
       <div className="home-container">
-        <h1>Welcome to <span className="brand">Movie Explorer</span></h1>
+        <h1>Welcome to <span className="brand">MoView</span></h1>
         <p>
           Discover movies by language, search for your favorites, and explore cast details.<br />
           Use the search bar or browse by category on the Explore page!
@@ -62,7 +62,7 @@ export default function Home() {
           <p>Like any movie to add it to your favorites. Your favorites are saved and always accessible in a dedicated row.</p>
         </div>
         <div className="info-box">
-          <img src="https://cdn-icons-png.flaticon.com/512/709/709496.png" alt="Info" className="info-box-icon" />
+          <img src="https://cdn-icons-png.flaticon.com/512/471/471664.png" alt="Info" className="info-box-icon" />
           <h3>Movie Details</h3>
           <p>Click the info button to see cast, plot, ratings, and more in a stylish modal. Explore every detail before you watch!</p>
         </div>

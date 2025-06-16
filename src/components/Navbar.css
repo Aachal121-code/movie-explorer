@@ -7,6 +7,8 @@
   height: 60px;
   justify-content: space-between;
   box-shadow: 0 2px 12px rgba(25, 118, 210, 0.10);
+  position: relative;
+  z-index: 10;
 }
 
 .navbar-logo {
@@ -24,6 +26,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  transition: right 0.3s;
 }
 
 .navbar-links a {
@@ -47,4 +50,78 @@
 .navbar-links a:hover {
   background: #fff;
   color: #1976d2;
+}
+
+
+.search-icon-link {
+  padding: 8px 12px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  background: none;
+}
+
+.search-icon-link.active,
+.search-icon-link:focus,
+.search-icon-link:hover {
+  background: #fff;
+  color: #1976d2;
+}
+
+/* Hamburger menu button */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 16px;
+  z-index: 20;
+}
+
+.navbar-toggle-bar {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Responsive styles */
+@media (max-width: 700px) {
+  .navbar {
+    padding: 0 10px;
+  }
+  .navbar-links {
+    position: absolute;
+    top: 60px;
+    right: -100vw;
+    width: 210px;
+    background: rgba(25, 118, 210, 0.97);
+    border-radius: 0 0 0 18px;
+    box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18);
+    padding: 18px 0 18px 0;
+    transition: right 0.3s;
+    z-index: 15;
+    flex-direction: column;
+    gap: 0;
+  }
+  .navbar-links.open {
+    right: 0;
+  }
+  .navbar-links li {
+    width: 100%;
+  }
+  .navbar-links a {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    border-radius: 0;
+  }
+  .navbar-toggle {
+    display: flex;
+  }
 }
