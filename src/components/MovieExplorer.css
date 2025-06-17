@@ -103,3 +103,13 @@
   cursor: pointer;
   z-index: 2;
 }
+
+@media (max-width: 700px) {
+  .horizontal-list {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+  }
+  .horizontal-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}

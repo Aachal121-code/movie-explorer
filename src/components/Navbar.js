@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <div className="navbar-logo">🎬 Movie Explorer</div>
+      <div className="navbar-logo">🎬 MoView</div>
       <button
         className="navbar-toggle"
         aria-label="Toggle menu"
@@ -21,6 +21,11 @@ function Navbar() {
         <span className="navbar-toggle-bar"></span>
       </button>
       <ul className={`navbar-links${menuOpen ? " open" : ""}`}>
+        <li className="navbar-close-btn-li">
+          <button className="navbar-close-btn" onClick={handleClose} aria-label="Close menu">
+            &times;
+          </button>
+        </li>
         <li>
           <NavLink to="/" end onClick={handleClose}>
             Home
