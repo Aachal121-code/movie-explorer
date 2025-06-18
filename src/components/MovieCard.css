@@ -1,7 +1,7 @@
 .movie-card {
-  min-width: 140px;
-  max-width: 140px;
-  background: linear-gradient(120deg, #e3f0ff 0%, #fafdff 100%);
+  min-width: 160px;
+  max-width: 160px;
+  /* background: linear-gradient(120deg, #e3f0ff 0%, #fafdff 100%); */
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(25, 118, 210, 0.10);
   text-align: center;
@@ -16,7 +16,7 @@
 .movie-card:hover {
   box-shadow: 0 8px 32px rgba(25, 118, 210, 0.18), 0 2px 8px rgba(0,0,0,0.10);
   transform: scale(1.05);
-  background: #e3f0ff;
+  background: #c2cbd642;
 }
 
 .movie-card img {
@@ -30,15 +30,16 @@
 
 .movie-title {
   font-size: 1rem;
-  color: #1976d2;
+  color: #ffffff;
   font-weight: 600;
   margin-bottom: 2px;
   letter-spacing: 0.5px;
 }
 
+
 .movie-meta {
   font-size: 0.92rem;
-  color: #444;
+  color: #a39d9d;
   margin-bottom: 4px;
   display: flex;
   justify-content: space-between;
@@ -63,6 +64,6 @@
   transition: background 0.18s;
 }
 
-.info-btn:hover { background: #1976d2; color: #fff; }
-.like-btn:hover { background: #43a047; color: #fff; }
-.remove-btn:hover { background: #d32f2f; color: #fff; }
+.info-btn:hover { background: #77ade3; color: #fff; }
+.like-btn:hover { background: #d99797; color: #fff; }
+.remove-btn:hover { background: #e3a0a0; color: #fff; }
