@@ -48,16 +48,16 @@
 
 .movie-card-btns {
   display: flex;
-  gap: 6px;
+  gap: 10px;
   justify-content: center;
   margin-top: 6px;
 }
 
 .icon-btn {
-  padding: 4px 8px;
+  padding: 4px 4px;
   border-radius: 6px;
   border: none;
-  font-size: 1.1rem;
+  font-size: .8rem;
   font-weight: 600;
   cursor: pointer;
   background: #e3f0ff;
