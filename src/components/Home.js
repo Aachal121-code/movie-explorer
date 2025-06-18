@@ -49,6 +49,7 @@ export default function Home() {
           Discover movies by language, search for your favorites, and explore cast details.<br />
           Use the search bar or browse by category on the Explore page!
         </p>
+        <button className="Login-btn" onClick={() => window.location.href = "/Login"}>Get Started <i class="fas fa-arrow-right"></i></button>
       </div>
 
 
