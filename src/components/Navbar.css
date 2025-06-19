@@ -41,15 +41,13 @@
 }
 
 .navbar-links a:focus {
-  background: #fff;
-  color: #1976d2;
-  box-shadow: 0 0 0 2px #1976d2;
+  box-shadow: 0 0 0 2px #1976d250;
 }
 
 .navbar-links a.active,
 .navbar-links a:hover {
-  background: #fff;
-  color: #1976d2;
+  background: #ffffff1a;
+  color: #0aebe7;
 }
 
 .navbar-close-btn-li {
