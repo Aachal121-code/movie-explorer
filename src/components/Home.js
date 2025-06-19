@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
+
 
 const OMDB_API_KEY = "4238d5ea"; // Replace with your OMDb API key
 
-export default function Home() {
+export default function Home({ hideGetStartedButton }) {
   const [posters, setPosters] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosters = async () => {
@@ -49,9 +52,10 @@ export default function Home() {
           Discover movies by language, search for your favorites, and explore cast details.<br />
           Use the search bar or browse by category on the Explore page!
         </p>
-        <button className="Login-btn" onClick={() => window.location.href = "/Login"}>Get Started <i class="fas fa-arrow-right"></i></button>
+        {!hideGetStartedButton && (
+          <button className="Login-btn" onClick={() => navigate("/login")}>Get Started <i className="fas fa-arrow-right"></i></button>
+        )}
       </div>
-
 
       {/* Second Slide: Animated Info Boxes */}
       <div className="info-slide-boxes">
