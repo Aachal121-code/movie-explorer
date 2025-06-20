@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login({ onLogin, onBack }) {
   const [flipped, setFlipped] = useState(false);
   const [showForgot, setShowForgot] = useState(false);
+  const navigate = useNavigate();
 
   // States for forms
   const [loginUser, setLoginUser] = useState("");
@@ -17,6 +19,7 @@ function Login({ onLogin, onBack }) {
     e.preventDefault();
     if (loginUser && loginPass) {
       onLogin(loginUser);
+      navigate("/");
     } else {
       alert("Please enter username and password");
     }
@@ -26,6 +29,7 @@ function Login({ onLogin, onBack }) {
     e.preventDefault();
     alert("Sign up successful! You can now sign in.");
     setFlipped(false);
+    navigate("/");
   };
 
   const handleForgot = (e) => {
@@ -37,7 +41,7 @@ function Login({ onLogin, onBack }) {
   return (
     <div className="auth-bg">
       <button className="auth-back-btn" onClick={onBack}>
-        ← Back
+        <i className="fas fa-arrow-left"></i> Back
       </button>
       <div className={`auth-card${flipped ? " flipped" : ""}`}>
         {/* Sign In */}
