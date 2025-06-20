@@ -1,0 +1,79 @@
+/* Root container */
+.favorite-root {
+  padding: 40px 10px;
+  background: linear-gradient(to right, #141e30, #243b55);
+  min-height: 100vh;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page Title */
+.favorite-root h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #ffcc00;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+/* Empty state */
+.favorite-root p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* Flex layout for favorite movies */
+.favorite-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 16px;
+}
+
+/* Movie card */
+.movie-card {
+  width: 180px;
+  background-color: #1c1c1c;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(220, 217, 206, 0.148);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.movie-card-content {
+  padding: 12px;
+  text-align: center;
+}
+
+.movie-card-content h4 {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.movie-card-content button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.movie-card-content button:hover {
+  background-color: #e60000;
+}

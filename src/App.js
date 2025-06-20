@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import MovieExplorer from "./components/MovieExplorer";
 import Login from "./components/Login";
+import FavoritesPage from "./components/FavoritesPage";
 
 function AppWrapper() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function AppWrapper() {
         <Route path="/explore" element={<MovieExplorer />} />
         <Route path="/login" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
         <Route path="/signup" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
+        <Route path="/favorites" element={<FavoritesPage/>} />
       </Routes>
     </>
   );

@@ -42,6 +42,11 @@
   margin-right: auto;
   padding: 0 16px;
 }
+.horizontal-section h2 {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 16px;
+}
 
 .horizontal-list {
   display: flex;

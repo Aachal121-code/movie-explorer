@@ -102,24 +102,7 @@ function MovieExplorer() {
         </button>
       </form>
 
-      {/* Favorites */}
-      {favorites.length > 0 && (
-        <div className="horizontal-section">
-          <h2>Favorites</h2>
-          <div className="horizontal-list">
-            {favorites.map(movie => (
-              <MovieCard
-                key={movie.imdbID}
-                movie={movie}
-                onInfo={setSelectedMovie}
-                onLike={addToFavorites}
-                onRemove={removeFromFavorites}
-                isFavorite={true}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+
 
       {/* Search Results */}
       {searchResults.length > 0 && (
