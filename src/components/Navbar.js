@@ -42,6 +42,11 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/comments" onClick={handleClose}>
+            Comments
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/signup" onClick={handleClose}>
             Sign Up
           </NavLink>

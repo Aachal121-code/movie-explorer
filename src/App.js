@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import MovieExplorer from "./components/MovieExplorer";
 import Login from "./components/Login";
 import FavoritesPage from "./components/FavoritesPage";
+import CommentsPage from "./components/CommentsPage";
 
 function AppWrapper() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,7 @@ function AppWrapper() {
         <Route path="/" element={<Home hideGetStartedButton={hideGetStartedButton} />} />
         <Route path="/explore" element={<MovieExplorer />} />
         <Route path="/login" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
+        <Route path="/comments" element={<CommentsPage />} />
         <Route path="/signup" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
         <Route path="/favorites" element={<FavoritesPage/>} />
       </Routes>
