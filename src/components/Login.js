@@ -7,29 +7,64 @@ function Login({ onLogin, onBack }) {
   const [showForgot, setShowForgot] = useState(false);
   const navigate = useNavigate();
 
-  // States for forms
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
   const [signupUser, setSignupUser] = useState("");
   const [signupPass, setSignupPass] = useState("");
   const [forgotEmail, setForgotEmail] = useState("");
 
-  // Handlers
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (loginUser && loginPass) {
-      onLogin(loginUser);
-      navigate("/");
-    } else {
+    if (!loginUser || !loginPass) {
       alert("Please enter username and password");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: loginUser, password: loginPass }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        onLogin(data.username);
+        navigate("/");
+      } else {
+        alert(data.error || "Login failed");
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
     }
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    alert("Sign up successful! You can now sign in.");
-    setFlipped(false);
-    navigate("/");
+    if (!signupUser || !signupPass) {
+      alert("Please enter username and password");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: signupUser, password: signupPass }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Sign up successful! You can now sign in.");
+        setFlipped(false);
+      } else {
+        alert(data.error || "Signup failed");
+      }
+    } catch (error) {
+      alert("Server error. Please try again later.");
+    }
   };
 
   const handleForgot = (e) => {
@@ -43,6 +78,7 @@ function Login({ onLogin, onBack }) {
       <button className="auth-back-btn" onClick={onBack}>
         <i className="fas fa-arrow-left"></i> Back
       </button>
+
       <div className={`auth-card${flipped ? " flipped" : ""}`}>
         {/* Sign In */}
         <div className="auth-card-face auth-card-front">
@@ -52,14 +88,14 @@ function Login({ onLogin, onBack }) {
               type="text"
               placeholder="Username"
               value={loginUser}
-              onChange={e => setLoginUser(e.target.value)}
+              onChange={(e) => setLoginUser(e.target.value)}
               required
             />
             <input
               type="password"
               placeholder="Password"
               value={loginPass}
-              onChange={e => setLoginPass(e.target.value)}
+              onChange={(e) => setLoginPass(e.target.value)}
               required
             />
             <button type="submit">Sign In</button>
@@ -73,6 +109,7 @@ function Login({ onLogin, onBack }) {
             </button>
           </div>
         </div>
+
         {/* Sign Up */}
         <div className="auth-card-face auth-card-back">
           <h2>Sign Up</h2>
@@ -81,14 +118,14 @@ function Login({ onLogin, onBack }) {
               type="text"
               placeholder="Username"
               value={signupUser}
-              onChange={e => setSignupUser(e.target.value)}
+              onChange={(e) => setSignupUser(e.target.value)}
               required
             />
             <input
               type="password"
               placeholder="Password"
               value={signupPass}
-              onChange={e => setSignupPass(e.target.value)}
+              onChange={(e) => setSignupPass(e.target.value)}
               required
             />
             <button type="submit">Sign Up</button>
@@ -100,6 +137,7 @@ function Login({ onLogin, onBack }) {
           </div>
         </div>
       </div>
+
       {/* Forgot Password Modal */}
       {showForgot && (
         <div className="auth-modal">
@@ -110,7 +148,7 @@ function Login({ onLogin, onBack }) {
                 type="email"
                 placeholder="Enter your email"
                 value={forgotEmail}
-                onChange={e => setForgotEmail(e.target.value)}
+                onChange={(e) => setForgotEmail(e.target.value)}
                 required
               />
               <button type="submit">Send Reset Link</button>
