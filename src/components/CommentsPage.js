@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./CommentsPage.css";
 
-function CommentsPage() {
+function CommentsPage({ user }) {
   const LOCAL_STORAGE_KEY = "comments-data";
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
@@ -35,18 +35,24 @@ function CommentsPage() {
   }, [comments]);
 
   const handlePost = () => {
+    if (!user) {
+      alert("You must be logged in to post a comment.");
+      return;
+    }
+
     if (commentText.trim()) {
       setComments([
         {
           id: Date.now(),
-          username: "User123",
-          text: commentText.trim()
+          username: user,
+          text: commentText.trim(),
         },
-        ...comments
+        ...comments,
       ]);
       setCommentText("");
     }
   };
+
 
   const handleDelete = () => {
     setComments(comments.filter((c) => c.id !== deleteTarget));
@@ -86,15 +92,16 @@ function CommentsPage() {
           </div>
         ))}
       </div>
-
+        
       <div className="comment-input-bar">
         <input
           type="text"
-          placeholder="Write a comment..."
+          placeholder={user ? "Write a comment..." : "Login to comment"}
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
+          disabled={!user}
         />
-        <button onClick={handlePost}>Post</button>
+        <button onClick={handlePost} disabled={!user}>Post</button>
       </div>
 
       {deleteTarget && (

@@ -32,7 +32,7 @@ function AppWrapper() {
         <Route path="/" element={<Home hideGetStartedButton={hideGetStartedButton} />} />
         <Route path="/explore" element={<MovieExplorer />} />
         <Route path="/login" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
-        <Route path="/comments" element={<CommentsPage />} />
+        <Route path="/comments" element={<CommentsPage user={user} />} />
         <Route path="/signup" element={<Login onLogin={handleLogin} onBack={handleBack} />} />
         <Route path="/favorites" element={<FavoritesPage/>} />
       </Routes>
