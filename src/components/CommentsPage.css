@@ -67,7 +67,7 @@
   color: #fbfbfb;
 }
 
-/* Reply Section */
+
 .replies-container {
   padding-left: 16px;
   margin-top: 8px;
@@ -96,7 +96,7 @@
   font-size: 0.8rem;
 }
 
-/* Input */
+
 .comment-input-bar {
   position: fixed;
   bottom: 0;

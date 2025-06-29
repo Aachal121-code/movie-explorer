@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
 
-const OMDB_API_KEY = "4238d5ea"; // Replace with your OMDb API key
+const OMDB_API_KEY = "4238d5ea"; 
 
 export default function Home({ hideGetStartedButton }) {
   const [posters, setPosters] = useState([]);
@@ -30,7 +30,7 @@ export default function Home({ hideGetStartedButton }) {
 
   return (
     <div className="home-root">
-      {/* Animated floating posters */}
+  
       <div className="animated-bg">
         {posters.map((poster, idx) => (
           <img
@@ -57,7 +57,7 @@ export default function Home({ hideGetStartedButton }) {
         )}
       </div>
 
-      {/* Second Slide: Animated Info Boxes */}
+    
       <div className="info-slide-boxes">
         <div className="info-box">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search" className="info-box-icon" />

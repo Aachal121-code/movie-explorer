@@ -1,4 +1,3 @@
-/* Root container */
 .favorite-root {
   padding: 40px 10px;
   background: black;
@@ -7,7 +6,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Page Title */
+
 .favorite-root h2 {
   font-size: 2rem;
   text-align: center;
@@ -16,14 +15,14 @@
   text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 }
 
-/* Empty state */
+
 .favorite-root p {
   text-align: center;
   font-size: 1.2rem;
   color: #ccc;
 }
 
-/* Flex layout for favorite movies */
+
 .favorite-list {
   display: flex;
   flex-wrap: wrap;
@@ -32,7 +31,7 @@
   padding-bottom: 16px;
 }
 
-/* Movie card */
+
 .movie-card {
   width: 180px;
   background-color: #1c1c1c;

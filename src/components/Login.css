@@ -17,7 +17,7 @@
   }
 }
 
-/* Clouds using radial gradients */
+
 .auth-bg::before,
 .auth-bg::after {
   content: "";

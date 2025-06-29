@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "./MovieCard";
 import "./MovieExplorer.css";
 
-const OMDB_API_KEY = "4238d5ea"; // Replace with your OMDb API key
+const OMDB_API_KEY = "4238d5ea"; 
 
 const categories = [
   { key: "hollywood", label: "Hollywood", search: "Avengers" },
@@ -25,7 +25,7 @@ function MovieExplorer() {
     JSON.parse(localStorage.getItem('favorites') || "[]")
   );
 
-  // Fetch movies for each category from OMDb
+  
   useEffect(() => {
     categories.forEach(async (cat) => {
       try {
@@ -39,7 +39,7 @@ function MovieExplorer() {
     });
   }, []);
 
-  // Fetch movie details for modal
+  
   useEffect(() => {
     if (!selectedMovie) {
       setSelectedMovieDetails(null);
@@ -55,7 +55,7 @@ function MovieExplorer() {
     fetchDetails();
   }, [selectedMovie]);
 
-  // Search movies from OMDb
+ 
   const searchMovies = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -73,7 +73,7 @@ function MovieExplorer() {
     setLoading(false);
   };
 
-  // Favorites logic
+  
   const addToFavorites = (movie) => {
     if (!favorites.find(fav => fav.imdbID === movie.imdbID)) {
       const updated = [...favorites, movie];
@@ -123,7 +123,7 @@ function MovieExplorer() {
         </div>
       )}
 
-      {/* Always show all horizontal lists */}
+     
       {categories.map(cat => (
         <div className="horizontal-section" key={cat.key}>
           <h2>{cat.label}</h2>
@@ -142,7 +142,6 @@ function MovieExplorer() {
         </div>
       ))}
 
-      {/* Movie Details Modal */}
       {selectedMovieDetails && (
         <div className="modal" onClick={() => setSelectedMovie(null)}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
