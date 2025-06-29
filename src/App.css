@@ -1,4 +1,3 @@
-/* Background */
 body, .main-bg {
   min-height: 100vh;
   background: linear-gradient(135deg, #f7fafc 0%, #e3e9f7 100%);
@@ -7,7 +6,6 @@ body, .main-bg {
   padding: 0;
 }
 
-/* App Card */
 .App {
   max-width: 1000px;
   margin: 20px auto 0 auto;
@@ -23,7 +21,7 @@ body, .main-bg {
   backdrop-filter: blur(8px);
 }
 
-/* Section Titles */
+
 .movies-container h2 {
   color: #1976d2;
   margin-bottom: 18px;
@@ -32,7 +30,7 @@ body, .main-bg {
   letter-spacing: 1px;
 }
 
-/* Movie List Layout */
+
 .movies-list {
    display: flex;
   flex-direction: row;
@@ -42,7 +40,7 @@ body, .main-bg {
   scroll-snap-type: x mandatory;
 }
 
-/* Movie Card */
+
 .movie-card {
   flex: 0 0 180px;
   scroll-snap-align: start;
@@ -79,7 +77,6 @@ body, .main-bg {
 .movie-card button:hover,
 .movie-card button:focus,
 .movie-card button:active {
-  /* Prevent parent .movie-card hover effect when button is hovered/clicked */
   background: #1976d2;
   color: #fff;
   border: 1px solid #1976d2;
@@ -88,7 +85,6 @@ body, .main-bg {
 .movie-card button:hover,
 .movie-card button:focus,
 .movie-card button:active {
-  /* Prevent card scaling when button is hovered/clicked */
   pointer-events: auto;
 }
 
@@ -244,7 +240,6 @@ body, .main-bg {
   background: #1251a3;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
   .App {
     padding: 12px 2vw 24px 2vw;

@@ -21,7 +21,6 @@ function AppWrapper() {
     window.history.back();
   };
 
-  // Define routes where Navbar should be hidden
   const hideNavbarRoutes = ["/login", "/signup"];
   const hideNavbar = hideNavbarRoutes.includes(location.pathname.toLowerCase());
 
