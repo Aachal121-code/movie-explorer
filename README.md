@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# 🎬 MoView – Movie Explorer with Comments & Favorites
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MoView is a full-stack movie exploration web application that allows users to:
+- Search and explore movies
+- Save favorites
+- Comment with replies
+- Register/login with secure authentication
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📁 Project Structure
 
-### `npm start`
+moview/
+│
+├── backend/ # Node.js + Express + MongoDB
+│ ├── server.js # API for login, signup
+│ └── ... # User model, DB config
+│
+├── frontend/ # React App
+│ ├── src/
+│ │ ├── App.js
+│ │ ├── CommentsPage.js
+│ │ ├── Login.js
+│ │ ├── FavoritesPage.js
+│ │ └── ...
+│ └── public/
+│
+├── .gitignore
+├── package.json
+└── README.md
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+yaml
+Copy
+Edit
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone the repo
 
-### `npm run build`
+```bash
+git clone https://github.com/yourusername/moview.git
+cd moview
+🧑‍💻 Frontend Setup (React)
+1. Navigate to frontend folder:
+bash
+cd frontend
+2. Install dependencies:
+bash
+npm install
+3. Start the frontend:
+bash
+npm start
+Runs on: http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+🛠️ Backend Setup (Express + MongoDB)
+1. Navigate to backend folder:
+bash
+cd backend
+2. Install backend dependencies:
+bash
+npm install
+3. Configure MongoDB (Optional .env)
+If you're using MongoDB Compass locally, update server.js to connect:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+js
+mongoose.connect('mongodb://localhost:27017/moview_users', { ... });
+Or use a .env with MONGO_URI and PORT
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start the backend:
+bash
+node server.js
+Runs on: http://localhost:5000
 
-### `npm run eject`
+✅ Features
+🔐 Authentication: Login & signup with hashed passwords (bcrypt)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+📦 MongoDB: Stores users
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+💬 Comments: Threaded replies (like Instagram)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+❤️ Favorites: Save and manage favorite movies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🌐 OMDb API (or mock): Movie exploration
 
-## Learn More
+📦 API Endpoints
+Route	Method	Description
+/api/signup	POST	Register new user
+/api/login	POST	Authenticate user login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Body (JSON):
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+json
+Copy
+Edit
+{
+  "username": "demo",
+  "password": "demo123"
+}
+🔧 Tech Stack
+Frontend: React, React Router
 
-### Code Splitting
+Backend: Node.js, Express
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Database: MongoDB (via Compass or Atlas)
 
-### Analyzing the Bundle Size
+Auth: bcryptjs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Styling: Custom CSS with responsive design
 
-### Making a Progressive Web App
+📸 Screenshots
+Home page ![image](https://github.com/user-attachments/assets/61b17e18-953f-4ade-8428-64ed9a4cc121)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Comment section with nested replies  ![image](https://github.com/user-attachments/assets/89f8e4f5-238b-4231-9b1e-ded8cc1a418c)
 
-### Advanced Configuration
+Login/signup page  ![image](https://github.com/user-attachments/assets/e0aa1c87-437d-49cf-954a-5d046f68ed8b)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+explorer  ![image](https://github.com/user-attachments/assets/af71403a-de3e-4215-b28e-670280e32e23)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+📝 License
+MIT License. Feel free to modify and use.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
